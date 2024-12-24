@@ -10,7 +10,7 @@ module.exports = {
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
-    '@storybook/react-webpack5', // Ensure this is included
+    '@storybook/react-webpack5',
   ],
   framework: {
     name: '@storybook/react-webpack5',
@@ -27,7 +27,7 @@ module.exports = {
         {
           loader: require.resolve('ts-loader'),
           options: {
-            transpileOnly: true, // Optional: Improves build performance
+            transpileOnly: true,
           },
         },
       ],

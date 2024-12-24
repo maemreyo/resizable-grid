@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Meta, StoryFn } from '@storybook/react';
-import ResizableGrid from '../src/ResizableGrid';
+import { ResizableGrid } from '../src';
 import { Layout } from 'react-grid-layout';
+import { fn, userEvent, within } from '@storybook/test';
+import { expect } from '@storybook/jest';
 
 export default {
   title: 'ResizableGrid',
   component: ResizableGrid,
+  // Add argTypes to control the behavior of the component
+  argTypes: {
+    isDraggable: { control: 'boolean' },
+    isResizable: { control: 'boolean' },
+    preventCollision: { control: 'boolean' },
+    compactType: {
+      control: { type: 'select', options: ['horizontal', 'vertical', null] },
+    },
+  },
 } as Meta<typeof ResizableGrid>;
 
 const initialLayouts = {
@@ -38,13 +49,17 @@ const initialLayouts = {
 
 const Template: StoryFn<typeof ResizableGrid> = args => (
   <ResizableGrid {...args}>
-    <div>Card A</div>
-    <div>Card B</div>
-    <div>Card C</div>
+    <div key="a">Card A</div>
+    <div key="b">Card B</div>
+    <div key="c">Card C</div>
   </ResizableGrid>
 );
 
 export const Default = Template.bind({});
 Default.args = {
-  initialLayouts: initialLayouts,
+  initialLayouts,
+  onLayoutChange: fn(),
+  isDraggable: true,
+  isResizable: true,
+  compactType: 'vertical',
 };

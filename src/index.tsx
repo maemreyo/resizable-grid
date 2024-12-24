@@ -14,4 +14,5 @@ export const Thing: FC<Props> = ({ children }) => {
   return <div>{children || `the snozzberries taste like snozzberries`}</div>;
 };
 
-export { default as ResizableGrid } from './ResizableGrid';
+export * from './components/ResizableGrid';
+export type { ResizableGridProps } from './components/ResizableGrid/ResizableGrid.types';
